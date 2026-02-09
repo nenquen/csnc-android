@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Stylized Soldier Silhouette based on the provided reference -->
+    <!-- Centered and scaled for adaptive icon safe zone -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,20 C50,20 46,23 46,28 C46,31 48,34 50,35 
+                          L41,43 C38,43 35,46 35,50 
+                          L28,65 C26,70 30,75 35,75 
+                          L36,75 L30,85 C28,88 32,92 35,90 
+                          L45,80 
+                          L55,90 C58,93 62,89 60,86 
+                          L54,72 
+                          L58,60 C60,55 62,50 63,45 
+                          L75,45 C80,45 83,40 85,38 
+                          L70,36 
+                          L65,34 C62,32 60,28 60,25 
+                          C60,22 58,20 54,20 Z" />
+
+    <!-- Weapon details (Stylized) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,34 L78,34 L85,38 L83,42 L70,42 L65,38 Z" />
+        
+    <!-- More detailed soldier path for better appearance -->
+    <!-- I'll replace the above with a more accurate trace of a soldier silhouette -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48.5,24.5c0-4.7,3.8-8.5,8.5-8.5s8.5,3.8,8.5,8.5c0,4-2.8,7.4-6.6,8.3l12.1,3.4l11,0.5l-0.5,2.1l-10.5,2.1L64.5,36.5
+                          l-2.4,5.4l12.4,12.4c1.1,1.1,1.1,2.8,0,3.9s-2.8,1.1-3.9,0L60.5,48.1l-2,8.4
+                          l9.1,22.1c0.7,1.7-0.1,3.6-1.8,4.3s-3.6-0.1-4.3-1.8L51.5,59.5l-9.1,22.1
+                          c-0.7,1.7-2.6,2.5-4.3,1.8s-2.5-2.6-1.8-4.3L45.5,57.1l-6-13.6c-1-2.2-0.5-4.8,1.3-6.5l8.1-7.7
+                          C48.6,28.4,48.5,26.5,48.5,24.5z"/>
+</vector>
