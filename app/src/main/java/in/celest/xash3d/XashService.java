@@ -79,7 +79,10 @@ public class XashService extends Service
 		engineIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		
 		Intent exitIntent = new Intent(this, exitButtonListener.class);
-		final PendingIntent pendingExitIntent = PendingIntent.getBroadcast(this, 0, exitIntent, 0);
+		int pendingIntentFlags = PendingIntent.FLAG_UPDATE_CURRENT;
+		if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M )
+			pendingIntentFlags |= PendingIntent.FLAG_IMMUTABLE;
+		final PendingIntent pendingExitIntent = PendingIntent.getBroadcast(this, 0, exitIntent, pendingIntentFlags);
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
 		{
@@ -103,10 +106,13 @@ public class XashService extends Service
 		notification.contentView.setTextViewText(status_text, "CSMoE");
 		notification.contentView.setOnClickPendingIntent(status_exit_button, pendingExitIntent);
 
-		notification.contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, engineIntent, 0);
+		notification.contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, engineIntent, pendingIntentFlags);
 		notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_FOREGROUND_SERVICE;
 		
-		startForeground(100, notification);
+		if( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q )
+			startForeground(100, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK);
+		else
+			startForeground(100, notification);
 		
 		return START_NOT_STICKY;
 	}

@@ -37,6 +37,18 @@ android {
         }
     }
 
+    externalNativeBuild {
+        ndkBuild {
+            path "src/main/jni/Android.mk"
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false

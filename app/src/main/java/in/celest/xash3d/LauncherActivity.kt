@@ -15,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.*
 import android.provider.DocumentsContract
 import android.os.Environment
+import android.net.Uri
+import android.provider.Settings
 import `in`.celest.xash3d.csbtem.R
 import `in`.celest.xash3d.ui.LauncherScreen
 import `in`.celest.xash3d.ui.theme.CSBootstrapTheme
@@ -62,6 +64,8 @@ class LauncherActivity : ComponentActivity() {
         mPref = getSharedPreferences("engine", 0)
         loadSettings()
 
+		ensureStorageAccess()
+
         setContent {
             CSBootstrapTheme {
                 LauncherScreen(
@@ -108,6 +112,7 @@ class LauncherActivity : ComponentActivity() {
     }
 
     private fun startXash() {
+		ensureStorageAccess()
         val intent = Intent(this, XashActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -125,6 +130,23 @@ class LauncherActivity : ComponentActivity() {
         }
         startActivity(intent)
     }
+
+	private fun ensureStorageAccess() {
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+			if (!Environment.isExternalStorageManager()) {
+				try {
+					val intent = Intent(
+						Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+						Uri.parse("package:$packageName")
+					)
+					startActivity(intent)
+				} catch (e: Exception) {
+					val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+					startActivity(intent)
+				}
+			}
+		}
+	}
 
     private fun getPathFromUri(uri: android.net.Uri): String? {
         return try {

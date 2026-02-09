@@ -1,0 +1,5 @@
+ifeq ($(NDK_DEBUG),1)
+LOCAL_CFLAGS += -O0 -g -DDEBUG
+else
+LOCAL_CFLAGS += -O3 -DNDEBUG
+endif

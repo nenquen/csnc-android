@@ -105,9 +105,24 @@ public class FWGSLib
 	
 	public static String getDefaultXashPath( Context ctx )
 	{
-		//File dir = Environment.getExternalStorageDirectory();
-		//if( dir != null && dir.exists() )
-		//	return dir.getPath() + "/xash";
+		try
+		{
+			File dir = Environment.getExternalStorageDirectory();
+			if( dir != null && dir.exists() )
+			{
+				File dotXash = new File( dir, ".xash" );
+				if( dotXash.exists() && dotXash.isDirectory() )
+					return dotXash.getAbsolutePath();
+
+				File xash = new File( dir, "xash" );
+				if( xash.exists() && xash.isDirectory() )
+					return xash.getAbsolutePath();
+			}
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+		}
 		return getExternalFilesDir(ctx);
 	}
 	
