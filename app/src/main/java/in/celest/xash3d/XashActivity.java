@@ -584,6 +584,10 @@ public class XashActivity extends Activity {
 	public static boolean performEngineKeyEvent( int action, int keyCode, KeyEvent event )
 	{
 		//Log.v(TAG, "EngineKeyEvent( " + action +", " + keyCode +" "+ event.isCtrlPressed() +" )");
+		// Prevent Android BACK from immediately exiting the app. Treat it like ESC in engine.
+		if( keyCode == KeyEvent.KEYCODE_BACK )
+			keyCode = KeyEvent.KEYCODE_ESCAPE;
+
 		if( action == KeyEvent.ACTION_DOWN )
 		{
 			if( event.isPrintingKey() || keyCode == 62 )// space is printing too
