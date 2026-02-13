@@ -135,6 +135,41 @@ public class XashActivity extends Activity {
 		launchSurfaceAndEngine();
 	}
 
+	@Override
+	public void onBackPressed()
+	{
+		if (mEngineReady)
+		{
+			// Never finish activity on BACK. Always open in-game menu (ESC).
+			nativeKey(1, KeyEvent.KEYCODE_ESCAPE);
+			nativeKey(0, KeyEvent.KEYCODE_ESCAPE);
+			return;
+		}
+		super.onBackPressed();
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK && mEngineReady)
+		{
+			XashActivity.handleKey(keyCode, event);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event)
+	{
+		if (keyCode == KeyEvent.KEYCODE_BACK && mEngineReady)
+		{
+			XashActivity.handleKey(keyCode, event);
+			return true;
+		}
+		return super.onKeyUp(keyCode, event);
+	}
+
 		// Events
 	@Override
 	protected void onPause() {
